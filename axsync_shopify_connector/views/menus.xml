@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_axsync_shopify_root" name="Shopify" sequence="46" web_icon="axsync_shopify_connector,static/description/icon.png"
+              groups="group_axsync_shopify_user"/>
+    <menuitem id="menu_axsync_shopify_dashboard" name="Dashboard" parent="menu_axsync_shopify_root" sequence="1" action="action_axsync_shopify_store"/>
+    <menuitem id="menu_axsync_shopify_sales" name="Sales" parent="menu_axsync_shopify_root" sequence="10"/>
+    <menuitem id="menu_axsync_shopify_orders" name="Orders" parent="menu_axsync_shopify_sales" sequence="1" action="action_axsync_shopify_orders"/>
+    <menuitem id="menu_axsync_shopify_import_order" name="Import one order" parent="menu_axsync_shopify_sales" sequence="2"
+              action="action_axsync_shopify_import_order" groups="group_axsync_shopify_manager"/>
+    <menuitem id="menu_axsync_shopify_checkouts" name="Abandoned checkouts" parent="menu_axsync_shopify_sales" sequence="3" action="action_axsync_shopify_checkout"/>
+    <menuitem id="menu_axsync_shopify_catalog" name="Catalog" parent="menu_axsync_shopify_root" sequence="20"/>
+    <menuitem id="menu_axsync_shopify_products" name="Products" parent="menu_axsync_shopify_catalog" sequence="1" action="action_axsync_shopify_product"/>
+    <menuitem id="menu_axsync_shopify_customers" name="Customers" parent="menu_axsync_shopify_catalog" sequence="2" action="action_axsync_shopify_customer"/>
+    <menuitem id="menu_axsync_shopify_finance" name="Finance" parent="menu_axsync_shopify_root" sequence="30"/>
+    <menuitem id="menu_axsync_shopify_payouts" name="Payouts" parent="menu_axsync_shopify_finance" sequence="1" action="action_axsync_shopify_payout"/>
+    <menuitem id="menu_axsync_shopify_tools" name="Monitoring" parent="menu_axsync_shopify_root" sequence="40"/>
+    <menuitem id="menu_axsync_shopify_queue" name="Queue" parent="menu_axsync_shopify_tools" sequence="1" action="action_axsync_shopify_queue"/>
+    <menuitem id="menu_axsync_shopify_logs" name="Logs" parent="menu_axsync_shopify_tools" sequence="2" action="action_axsync_shopify_log"/>
+</odoo>
