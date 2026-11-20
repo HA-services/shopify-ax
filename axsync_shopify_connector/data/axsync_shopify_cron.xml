@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cron_axsync_shopify_queue" model="ir.cron">
+            <field name="name">Shopify: process queue</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_process_queue()</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_orders" model="ir.cron">
+            <field name="name">Shopify: import orders</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_import_orders()</field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_stock" model="ir.cron">
+            <field name="name">Shopify: export stock</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_export_stock()</field>
+            <field name="interval_number">30</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_tracking" model="ir.cron">
+            <field name="name">Shopify: send tracking numbers</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_export_tracking()</field>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_products" model="ir.cron">
+            <field name="name">Shopify: import products</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_import_products()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_checkouts" model="ir.cron">
+            <field name="name">Shopify: import abandoned checkouts</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_import_checkouts()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_payouts" model="ir.cron">
+            <field name="name">Shopify: import payouts</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_import_payouts()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+        <record id="cron_axsync_shopify_cleanup" model="ir.cron">
+            <field name="name">Shopify: clean old logs</field>
+            <field name="model_id" ref="model_axsync_shopify_store"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_cleanup()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>
