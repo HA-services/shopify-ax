@@ -1,0 +1,494 @@
+<section class="oe_container">
+  <div style="background: linear-gradient(125deg, #0b1530 0%, #14305a 55%, #17808a 100%); padding: 48px 0 52px 0;">
+    <div class="container">
+      <div class="row" style="align-items:center;">
+        <div class="col-md-6">
+          <div style="color:#f4a261;font-weight:800;letter-spacing:1.6px;font-size:13px;">AXSYNC &nbsp;|&nbsp; ODOO 17.0 &nbsp;|&nbsp; SALES</div>
+          <h1 style="margin: 10px 0 14px 0; font-size: 46px; line-height:1.08; font-weight:800; color:#ffffff;">Shopify Odoo Connector</h1>
+          <p style="font-size: 20px; line-height:1.5; color:#d6e4f5; margin:0 0 16px 0;">Keep products, stock, orders, customers and tracking in sync between Shopify and Odoo, without double entry.</p>
+          <p style="font-size: 16px; line-height:1.55; color:#b9cde6; margin:0 0 20px 0;">Real-time webhooks. A retry queue that never loses an order. Workflows that invoice and ship by themselves. Safe mode for the first run.</p>
+          <p style="margin:0;"><span style="display:inline-block;padding:3px 11px;border-radius:12px;background:#f4a261;color:#0f1b33;font-size:12px;font-weight:700;">Odoo 17.0</span> <span style="display:inline-block;padding:3px 11px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:700;">GraphQL Admin API</span> <span style="display:inline-block;padding:3px 11px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:700;">Multi-store</span> <span style="display:inline-block;padding:3px 11px;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;font-size:12px;font-weight:700;">No extra libraries</span></p>
+        </div>
+        <div class="col-md-6" style="margin-top:12px;">
+          <div style="border-radius:14px;overflow:hidden;box-shadow:0 26px 60px rgba(0,0,0,.5);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div>
+            <img src="axsync_dashboard.png" class="img img-fluid" alt="Shopify dashboard in Odoo" style="display:block;width:100%;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#ffffff;border-bottom:1px solid #e3e8f0;">
+    <div class="container" style="padding: 22px 0 8px 0;">
+      <div class="row text-center">
+        <div class="col-6 col-md-3" style="margin-bottom:14px;"><div style="font-size:38px;font-weight:800;color:#1fb5a8;line-height:1;">11</div><div style="color:#4b5a73;font-size:14px;margin-top:6px;">data flows in one module</div></div>
+        <div class="col-6 col-md-3" style="margin-bottom:14px;"><div style="font-size:38px;font-weight:800;color:#1fb5a8;line-height:1;">14</div><div style="color:#4b5a73;font-size:14px;margin-top:6px;">webhook topics, all signature checked</div></div>
+        <div class="col-6 col-md-3" style="margin-bottom:14px;"><div style="font-size:38px;font-weight:800;color:#1fb5a8;line-height:1;">8</div><div style="color:#4b5a73;font-size:14px;margin-top:6px;">scheduled actions</div></div>
+        <div class="col-6 col-md-3" style="margin-bottom:14px;"><div style="font-size:38px;font-weight:800;color:#1fb5a8;line-height:1;">94</div><div style="color:#4b5a73;font-size:14px;margin-top:6px;">automated tests</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Why this module</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Run your Shopify store from Odoo, not next to it</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;">
+        <div class="col-md-7">
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Selling on Shopify and keeping the books, stock and deliveries in Odoo usually means one of two things: somebody retypes orders every morning, or a connector that works until the first unknown SKU, the first duplicate webhook or the first expired token.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">This connector is built around the failures. Every Shopify event becomes a job in a queue. If something cannot be matched, the job waits, you get an activity that names the problem, and the order imports itself after you fix it. Nothing is dropped and nothing is created twice.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Everything lands in standard Odoo records: sales orders, deliveries, invoices, credit notes, partners and products. Reports, invoicing and shipping keep working the way your team already knows.</p>
+        </div>
+        <div class="col-md-5">
+          <table class="table" style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;overflow:hidden;font-size:14px;">
+            <thead><tr style="background:#14305a;color:#fff;"><th style="color:#fff;background:#14305a;border:0;">Typical connector</th><th style="color:#fff;background:#14305a;border:0;">This connector</th></tr></thead>
+            <tbody>
+              <tr><td>Fails silently on an unknown SKU</td><td><strong style="color:#14305a;">Waits, tells you, imports later</strong></td></tr>
+              <tr><td>Duplicate webhooks make duplicate orders</td><td><strong style="color:#14305a;">Duplicate-proof by delivery id and order id</strong></td></tr>
+              <tr><td>Token expires, sync stops</td><td><strong style="color:#14305a;">Renews itself</strong></td></tr>
+              <tr><td>All or nothing on first run</td><td><strong style="color:#14305a;">Safe mode, read-only</strong></td></tr>
+              <tr><td>Stock overwritten with every run</td><td><strong style="color:#14305a;">Only changed quantities, with buffer</strong></td></tr>
+              <tr><td>Errors in a server log</td><td><strong style="color:#14305a;">Queue and log inside Odoo</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">The problems it solves</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row">
+        <div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2f6fed;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Double entry</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Orders typed in twice, tracking copied by hand, stock counted in two places.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #1fb5a8;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Overselling</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Stock in Shopify drifts from the warehouse unless it is pushed after every change.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #f4a261;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Lost orders</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A webhook fails once and the order never arrives. Nobody notices until the customer writes.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #8b5cf6;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Unknown products</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A new SKU on Shopify blocks the whole import behind one error.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #e5534b;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Tax and total mismatches</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Prices with and without tax, shipping with tax, rounding. The Odoo total must equal the Shopify total.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2e9d57;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">No visibility</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">When it breaks you read a server log. You need a screen with a queue and a reason.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Scope</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">What moves, and in which direction</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_matrix.png" class="img img-fluid" alt="Table of data flows between Shopify and Odoo" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Eleven flows. Each one can be switched off per store, and safe mode blocks everything that writes to Shopify.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Architecture</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">How it fits together</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_architecture.png" class="img img-fluid" alt="Architecture: Shopify, webhook endpoint, GraphQL client, queue, services and Odoo" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Shopify calls a signed webhook address on your Odoo. The connector calls the GraphQL Admin API. Both paths go through the same queue.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Get going</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Quick start</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-5" style="padding-top:8px;"><div style="display:flex;align-items:flex-start;margin-bottom:14px;"><div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#14305a;color:#fff;font-weight:800;font-size:18px;text-align:center;line-height:40px;margin-right:14px;">1</div><div><div style="font-weight:700;color:#14305a;font-size:17px;">Create the app in Shopify</div><div style="color:#4b5a73;line-height:1.5;">Dev Dashboard, new app, grant the access scopes listed below, install it on your store.</div></div></div><div style="display:flex;align-items:flex-start;margin-bottom:14px;"><div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#14305a;color:#fff;font-weight:800;font-size:18px;text-align:center;line-height:40px;margin-right:14px;">2</div><div><div style="font-weight:700;color:#14305a;font-size:17px;">Add the store in Odoo</div><div style="color:#4b5a73;line-height:1.5;">Shopify > Dashboard > New. Enter the store address, the client ID and the client secret.</div></div></div><div style="display:flex;align-items:flex-start;margin-bottom:14px;"><div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#14305a;color:#fff;font-weight:800;font-size:18px;text-align:center;line-height:40px;margin-right:14px;">3</div><div><div style="font-weight:700;color:#14305a;font-size:17px;">Press Connect and test</div><div style="color:#4b5a73;line-height:1.5;">Shop name, currency, scopes and locations are read. Missing scopes are named.</div></div></div><div style="display:flex;align-items:flex-start;margin-bottom:14px;"><div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#14305a;color:#fff;font-weight:800;font-size:18px;text-align:center;line-height:40px;margin-right:14px;">4</div><div><div style="font-weight:700;color:#14305a;font-size:17px;">Map locations and defaults</div><div style="color:#4b5a73;line-height:1.5;">Pick the Odoo warehouse for each Shopify location, the pricelist and the workflows. Turn on safe mode for a first look.</div></div></div><div style="display:flex;align-items:flex-start;margin-bottom:14px;"><div style="flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:#14305a;color:#fff;font-weight:800;font-size:18px;text-align:center;line-height:40px;margin-right:14px;">5</div><div><div style="font-weight:700;color:#14305a;font-size:17px;">Import, then register webhooks</div><div style="color:#4b5a73;line-height:1.5;">Import products and orders, check the result, then register webhooks and switch safe mode off.</div></div></div></div><div class="col-md-7">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_store.png" class="img img-fluid" alt="Store form with connection settings" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">The store form. Credentials are only visible to the Shopify Manager group.</p>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Setup guide</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Shopify setup in detail</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <h4 style="color:#14305a;">1. Create the app (recommended)</h4>
+      <ul style="line-height:1.7;color:#2c3a57;font-size:16px;">
+        <li>Open the Shopify Dev Dashboard and create an app. Choose the store as the install target; the app and the store must belong to the same Shopify organization.</li>
+        <li>Under access scopes add the scopes below, release a version and install the app on the store.</li>
+        <li>Copy the <strong>client ID</strong> and <strong>client secret</strong> from the app settings.</li>
+      </ul>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Access scope</th><th style="color:#fff;background:#14305a;">Used for</th></tr></thead><tbody>
+<tr><td><code>read_products</code></td><td>Read products and variants</td></tr>
+<tr><td><code>write_products</code></td><td>Create and update products</td></tr>
+<tr><td><code>read_inventory</code></td><td>Read stock levels</td></tr>
+<tr><td><code>write_inventory</code></td><td>Update stock levels</td></tr>
+<tr><td><code>read_locations</code></td><td>Read locations</td></tr>
+<tr><td><code>read_orders</code></td><td>Read orders, refunds and abandoned checkouts</td></tr>
+<tr><td><code>write_orders</code></td><td>Cancel orders</td></tr>
+<tr><td><code>read_customers</code></td><td>Read customers</td></tr>
+<tr><td><code>write_customers</code></td><td>Create and update customers</td></tr>
+<tr><td><code>read_merchant_managed_fulfillment_orders</code></td><td>Read fulfillment orders</td></tr>
+<tr><td><code>write_merchant_managed_fulfillment_orders</code></td><td>Send tracking numbers (create fulfillments)</td></tr>
+</tbody></table>
+      <p style="color:#4b5a73;">Optional:</p>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Access scope</th><th style="color:#fff;background:#14305a;">Used for</th></tr></thead><tbody>
+<tr><td><code>read_all_orders</code></td><td>Orders older than 60 days. Needed for a historical import.</td></tr>
+<tr><td><code>read_shopify_payments_payouts</code></td><td>Payouts. Needs Shopify Payments on the store.</td></tr>
+</tbody></table>
+      <h4 style="color:#14305a;margin-top:20px;">2. Connect in Odoo</h4>
+      <ul style="line-height:1.7;color:#2c3a57;font-size:16px;">
+        <li>Shopify > Dashboard > New. Name, store address (<code>my-shop.myshopify.com</code>, a full URL is cleaned up), authentication <em>Client credentials</em>, client ID, client secret.</li>
+        <li>Press <strong>Connect and test</strong>. The status turns to Connected and the locations appear on the Inventory tab. If the app lacks a scope, a red banner lists it.</li>
+        <li>Odoo asks Shopify for a token with the client credentials grant, keeps it for about a day and asks for a new one before it expires or after a 401.</li>
+      </ul>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_auth.png" class="img img-fluid" alt="The two ways to authenticate" style="display:block;width:100%;"/></div>
+      <h4 style="color:#14305a;margin-top:20px;">3. Already have a token?</h4>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Choose <em>Admin API access token</em>, paste the token, and paste the app secret key as the webhook secret so signatures can be checked. Shopify no longer shows new legacy tokens, so this is for apps that already have one.</p>
+      <h4 style="color:#14305a;margin-top:20px;">4. Webhooks</h4>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Odoo must be reachable by Shopify over public HTTPS (system parameter <code>web.base.url</code>). Press <strong>Register webhooks</strong>. The connector creates one subscription per topic that points to this address, and the Webhooks tab shows how many deliveries each topic has received:</p>
+      <pre style="background:#eef3f9 !important;color:#0f172a !important;border:1px solid #d3dcea;border-left:5px solid #1fb5a8;padding:14px 16px;border-radius:8px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin:6px 0 16px 0;"><code style="color:#0f172a !important;background:transparent !important;font-size:13px;line-height:1.55;">https://your-odoo.example.com/axsync_shopify/webhook/&lt;store id></code></pre>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;color:#4b5a73;">If your Odoo is private, skip this step. The scheduled import still picks everything up every 15 minutes.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Overview</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Dashboard</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">One card per store with orders, products, customers, waiting jobs, failed jobs and sales. A badge shows Connected, Error or Safe mode.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Open a card for the store form with a button for every action: import orders, export products, export stock, send tracking, import customers, checkouts and payouts.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_dashboard.png" class="img img-fluid" alt="Dashboard with one card per store" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">All settings in one place</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">The store form</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Connection, orders, products, inventory, customers, automation and webhooks, each on its own tab. Every rule in this document is a field here.</p>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_store_orders.png" class="img img-fluid" alt="Orders tab of the store form" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Orders tab: defaults for imported orders, import rules and the payment statuses to import.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Catalog</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Products and variants</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-7">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_products.png" class="img img-fluid" alt="Mapped Shopify products with status and variant count" style="display:block;width:100%;"/></div>
+</div><div class="col-md-5" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;"><strong>Import</strong> products from Shopify and match them to Odoo by variant map, then SKU, then barcode. Unknown products can be created, with attributes built from the Shopify options, or left alone with an activity for you.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;"><strong>Export</strong> products as draft or active, with variants, options, price, compare-at price, barcode, weight, tags, vendor, product type, SEO title and description, the main image and mapped metafields. Run it again and the same Shopify product is updated, never duplicated.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Publish, set to draft or archive from Odoo. Exclude single products with one checkbox.</p>
+</div></div>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Price rule</th><th style="color:#fff;background:#14305a;">How it works</th></tr></thead><tbody>
+<tr><td>Pricelist</td><td>The price of each variant comes from the pricelist set on the store.</td></tr>
+<tr><td>Markup</td><td>A percent added on top, for example 10.</td></tr>
+<tr><td>Rounding</td><td>For example 0.05 rounds to five cents. 0.99 style endings need a custom rounding rule in the pricelist.</td></tr>
+<tr><td>Compare-at</td><td>When the pricelist price is below the sales price, the sales price is sent as the compare-at price.</td></tr>
+</tbody></table>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Per-product controls on the Odoo product</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">A Shopify tab on the product form holds the exclusion switch, whether the product is published, vendor, product type, tags and the SEO fields. A server action <em>Export to Shopify</em> on the product list sends the selected products to every connected store.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_template_tab.png" class="img img-fluid" alt="Shopify tab on the product form" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Inventory</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Stock</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_stock.png" class="img img-fluid" alt="How a stock quantity is calculated and sent" style="display:block;width:100%;"/></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;margin-top:14px;">Choose the quantity (free, on hand or forecast), a percentage, a safety stock and a cap. Each Shopify location is mapped to one Odoo warehouse. Only quantities that changed since the last export are sent, in batches of 100. Press <em>Export all quantities now</em> to resend everything, or import the quantities from Shopify as inventory adjustments.</p>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_store_inventory.png" class="img img-fluid" alt="Inventory tab with locations and rules" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Locations map to warehouses. Services and excluded products are never sent.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Order to cash</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Orders</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_orderflow.png" class="img img-fluid" alt="From a Shopify order to a shipped parcel" style="display:block;width:100%;"/></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;margin-top:14px;">Orders arrive by webhook or by schedule, with a filter on the payment status. The job asks Shopify for the complete current order, so a late or repeated webhook can never overwrite newer data.</p>
+      <ul style="line-height:1.7;color:#2c3a57;font-size:16px;">
+        <li>Customer: matched by Shopify id, then email, then phone. Guest checkouts become partners by email. A company name creates a company with the person as its contact.</li>
+        <li>Addresses: invoice and delivery addresses become contacts of the customer, reused when the same address comes again.</li>
+        <li>Lines: matched by variant map, SKU, then barcode. Discounts become a discount percent on the line. Shipping becomes a line with your shipping product.</li>
+        <li>Taxes: map a Shopify tax title and rate to an Odoo tax, or let the connector find the sales tax with the same rate. Prices entered with tax are converted when your Odoo tax excludes it, and the other way round.</li>
+        <li>Totals: the Odoo total is compared with the Shopify total. A difference of up to 10 cents is absorbed in a rounding line, a bigger one is reported on the order and in the log.</li>
+        <li>Currency: the order uses the store pricelist, or the customer currency when the option is on and a pricelist exists.</li>
+        <li>Duplicates: an order can only be imported once per store, enforced by the database.</li>
+      </ul>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_orders.png" class="img img-fluid" alt="Shopify orders list" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Imported orders with payment and fulfillment status.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Automation</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Workflows by payment status and gateway</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">A workflow says what to do with an order when it arrives: confirm, validate the delivery, create the invoice, post it and register the payment in a journal.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Pick the workflow by payment status, or override it for a payment gateway, for example bank transfer orders stay quotations until the money arrives. Journals are mapped per gateway.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">If a step fails, the order stays as it is, the reason is written on the order and in the log, and the rest of the import continues.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_workflows.png" class="img img-fluid" alt="Order workflows, gateways and taxes" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Never lose an order</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">When something does not match</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">An order with a SKU that Odoo does not know is not created halfway. It stays in the queue as a waiting job, and an activity is scheduled for the person you chose: <em>Line "Linen towel" (SKU TOWEL-9) has no matching product</em>.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Fix the SKU or create the product, and the next queue run imports the order. The same applies to products found in Shopify with no Odoo match.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_queue.png" class="img img-fluid" alt="Queue with waiting, failed and done jobs" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Fulfillment</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Shipping and tracking</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-5" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">When a delivery is done in Odoo, the connector asks Shopify for the open fulfillment orders and sends the quantities that were really delivered, with carrier, tracking number and link. Partial shipments and backorders work: each delivery sends its own part.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Enter the tracking data on the delivery, or let it come from the delivery carrier fields when the Delivery app is installed. If the order was already fulfilled in Shopify, the delivery is marked as sent and nothing is duplicated.</p>
+</div><div class="col-md-7">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_delivery.png" class="img img-fluid" alt="Shopify tab on a delivery order" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Both ways</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Cancellations and refunds</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <ul style="line-height:1.7;color:#2c3a57;font-size:16px;">
+        <li><strong>Cancelled in Shopify:</strong> the Odoo order is cancelled and marked. Nothing is sent back to Shopify.</li>
+        <li><strong>Cancelled in Odoo:</strong> the Shopify order is cancelled with restock and no customer email. Switch it off per store, or use safe mode.</li>
+        <li><strong>Refunds:</strong> a refund in Shopify creates a credit note with the refunded lines and quantities, linked to the Shopify refund so it is never created twice. An order without a posted invoice, or an amount-only refund, gets a note on the order instead.</li>
+        <li>Creating refunds in Shopify from an Odoo credit note is not part of this module.</li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Contacts</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Customers</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Import customers from Shopify or export Odoo customers. Matching goes by Shopify id, email and phone, so existing partners are reused. Shopify tags become partner categories, and addresses are created with country and state.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_customers.png" class="img img-fluid" alt="Shopify customers mapped to partners" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Reliability</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Webhooks, queue and retries</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 10px 26px rgba(20,48,90,.10);"><img src="diagram_webhook.png" class="img img-fluid" alt="What happens to a webhook" style="display:block;width:100%;"/></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;margin-top:14px;">Every delivery is verified with the HMAC-SHA256 signature in the <code>X-Shopify-Hmac-SHA256</code> header, checked against the raw body. A wrong signature is answered with 401 and nothing is stored. A repeated delivery id is ignored. The answer is sent at once, and the work happens from the queue.</p>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Topic</th><th style="color:#fff;background:#14305a;">What the connector does</th></tr></thead><tbody>
+<tr><td><code>orders/create, orders/updated, orders/cancelled</code></td><td>Fetch the order and create or update it in Odoo</td></tr>
+<tr><td><code>refunds/create</code></td><td>Fetch the order and create the credit note</td></tr>
+<tr><td><code>fulfillments/create</code></td><td>Refresh the order status, note it on the order</td></tr>
+<tr><td><code>products/create, products/update, products/delete</code></td><td>Refresh the product map or mark it deleted</td></tr>
+<tr><td><code>customers/create, customers/update</code></td><td>Refresh the customer</td></tr>
+<tr><td><code>inventory_levels/update</code></td><td>Forget the quantity sent so the next export puts it right</td></tr>
+<tr><td><code>checkouts/create, checkouts/update</code></td><td>Refresh abandoned checkouts (only when enabled)</td></tr>
+<tr><td><code>app/uninstalled</code></td><td>Mark the store as Error with the reason</td></tr>
+<tr><td><code>customers/data_request, customers/redact, shop/redact</code></td><td>Written to the log (privacy requests, see FAQ)</td></tr>
+</tbody></table>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_store_webhooks.png" class="img img-fluid" alt="Webhooks tab with delivery counters" style="display:block;width:100%;"/></div>
+      <p style="margin: 8px 0 0 0; font-size: 13px; color:#6b7a93;">Each topic can be switched off without touching Shopify, and shows how many deliveries arrived.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Know what happened</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Log and monitoring</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Every import, export and failure is written to a log with the store, the operation and the reference. Errors are kept, routine entries are cleaned after 60 days. The dashboard shows waiting and failed jobs, and the queue offers Retry and Run now for any selection.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_logs.png" class="img img-fluid" alt="Shopify log with errors and warnings" style="display:block;width:100%;"/></div>
+</div></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Extras</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Abandoned checkouts and payouts</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row" style="align-items:center;"><div class="col-md-4" style="padding-top:8px;">      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Abandoned checkouts come in with the email, the items, the total and the recovery link. Pick the ones you want to chase and create a follow-up activity with one button. Checkouts that were completed afterwards are marked as recovered.</p>
+</div><div class="col-md-8">      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_checkouts.png" class="img img-fluid" alt="Abandoned checkouts list" style="display:block;width:100%;"/></div>
+</div></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;margin-top:14px;">Shopify Payments payouts are listed with gross, fees, refunds and net, ready to compare with your bank statement. Payouts are not reconciled automatically.</p>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_payouts.png" class="img img-fluid" alt="Payouts list" style="display:block;width:100%;"/></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Reports</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Sales reporting by store</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">Orders open in a list, a pivot and a graph, grouped by store and period. The standard sales reports keep working, because these are standard sales orders.</p>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_orders_pivot.png" class="img img-fluid" alt="Pivot of Shopify sales by store and month" style="display:block;width:100%;"/></div>
+      <div style="margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #d5dde9;box-shadow:0 14px 34px rgba(20,48,90,.16);background:#fff;"><div style="height:26px;background:#eaeff6;padding:8px 0 0 12px;line-height:0;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f06a6a;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#f4c04f;margin-right:6px;"></span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#58c27d;"></span></div><img src="axsync_orders_graph.png" class="img img-fluid" alt="Graph of Shopify sales by week" style="display:block;width:100%;"/></div>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Details that matter</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">More that is inside</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row">
+        <div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2f6fed;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Multi-store and multi-company</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Connect several Shopify stores, each with its own company, warehouse, pricelist, workflows and schedule. Records are limited to the allowed companies.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #1fb5a8;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Safe mode</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Imports keep working, nothing is ever written to Shopify. Perfect for the first run against a live store.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #f4a261;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Import one order</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Type #1042 and import exactly that order, even outside the normal import window.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #8b5cf6;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Metafield mapping</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Map a Shopify metafield to an Odoo field, in or out, for orders, products and customers.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #e5534b;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Per-topic webhook switches</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Ignore a topic in Odoo without changing anything in Shopify.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2e9d57;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Rate-limit aware</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">The connector reads the cost data of every answer, waits when the bucket is low and retries throttled requests.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2f6fed;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Automatic token renewal</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A 401 triggers one silent renewal and a retry. A broken connection puts the store in Error with the reason, and the other stores keep running.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #1fb5a8;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Mismatch activities</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Unknown SKUs and unmatched products become activities for the person you choose, once.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #f4a261;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Customer tags</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Shopify customer tags become partner categories.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #8b5cf6;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Order notes and tags</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">The customer note, tags and sales channel are posted on the order.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #e5534b;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Rounding guard</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Totals are compared and small differences absorbed, large ones reported.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2e9d57;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Image links without login</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Exported product images are served from a signed link that works for Shopify and nobody else.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Scheduled actions</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Action</th><th style="color:#fff;background:#14305a;">Interval</th><th style="color:#fff;background:#14305a;">Per store switch</th></tr></thead><tbody>
+<tr><td>Process queue</td><td>every 5 minutes</td><td>no</td></tr>
+<tr><td>Import orders</td><td>every 15 minutes</td><td>yes</td></tr>
+<tr><td>Export stock</td><td>every 30 minutes</td><td>yes</td></tr>
+<tr><td>Send tracking numbers</td><td>every 15 minutes</td><td>yes</td></tr>
+<tr><td>Import products</td><td>every hour</td><td>yes</td></tr>
+<tr><td>Import abandoned checkouts</td><td>every hour</td><td>yes</td></tr>
+<tr><td>Import payouts</td><td>every day</td><td>yes</td></tr>
+<tr><td>Clean old logs</td><td>every day</td><td>no</td></tr>
+</tbody></table>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;color:#4b5a73;">Intervals can be changed in Settings, Technical, Scheduled Actions. Every action respects safe mode and skips stores that are not connected.</p>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Trust, with a checklist</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Honest about testing</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="background:#fff;border:1px solid #e3e8f0;border-left:5px solid #f4a261;border-radius:10px;padding:20px 24px;">
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">The 94 automated tests run against a simulated Shopify that was written from the public Admin API documentation. They prove what happens on the Odoo side: matching, prices, taxes, workflows, queue, retries, webhooks, signatures and access rights, on Odoo 17.0.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;">A simulator cannot prove that every field name and every mutation argument matches your live shop today. Shopify changes its API every quarter. Before you go live, spend half an hour on a Shopify development store with the checklist below and switch on safe mode for the first live run.</p>
+      <p style="font-size:16px;line-height:1.6;color:#2c3a57;margin-bottom:0;">The connector sends the API version set on the store (default 2026-10). If Shopify retires a field, all queries are kept in one file, so a fix is small.</p>
+      </div>
+      <table class="table table-bordered" style="background:#fff;font-size:14px;"><thead><tr style="background:#14305a;"><th style="color:#fff;background:#14305a;">Check on a development store</th><th style="color:#fff;background:#14305a;">What you should see</th></tr></thead><tbody>
+<tr><td>Connect and test</td><td>Shop name, currency, granted scopes, two locations</td></tr>
+<tr><td>Export a product with two variants and an image</td><td>A draft product with options, prices and the image</td></tr>
+<tr><td>Export stock</td><td>The quantity appears on the right location</td></tr>
+<tr><td>Create a test order in Shopify and import it</td><td>A quotation or confirmed order with the right total</td></tr>
+<tr><td>Deliver it in Odoo with a tracking number</td><td>The order shows as fulfilled with the tracking link</td></tr>
+<tr><td>Refund one line in Shopify</td><td>A credit note with that line</td></tr>
+<tr><td>Cancel an unpaid test order in Odoo</td><td>The Shopify order is cancelled</td></tr>
+<tr><td>Register webhooks and place another order</td><td>The webhook counter grows and the order appears within seconds</td></tr>
+<tr><td>Shopify Payments stores: import payouts</td><td>Payouts with net and fees</td></tr>
+<tr><td>Import abandoned checkouts</td><td>The checkout appears with its recovery link</td></tr>
+</tbody></table>
+
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">What you get</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Business benefits</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row">
+        <div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #f4a261;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Hours back every week</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">No retyping of orders, no copying of tracking numbers, no stock updates by hand.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #8b5cf6;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Fewer oversells</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Stock follows the warehouse, with a buffer you control.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #e5534b;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Books that match</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Invoices, payments and credit notes created from the same orders, with matching totals.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2e9d57;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Nothing lost</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A queue, retries and a visible reason for every failure.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #2f6fed;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Safe to adopt</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Safe mode, a checklist and per-store switches let you start small.</p></div></div><div class="col-md-4" style="margin-bottom: 18px;"><div style="height:100%;background:#fff;border:1px solid #e3e8f0;border-top:4px solid #1fb5a8;border-radius:10px;padding:18px 18px 14px;box-shadow:0 4px 14px rgba(20,48,90,.07);"><h5 style="margin:0 0 8px 0;color:#14305a;font-weight:700;">Native Odoo</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Standard groups, activities, cron jobs and views. No external service and no extra library.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Security</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Security notes</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div style="background:#fff;border:1px solid #e3e8f0;border-left:5px solid #1fb5a8;border-radius:10px;padding:20px 24px;">
+      <ul style="margin:0;line-height:1.7;color:#2c3a57;">
+        <li>Webhooks are accepted only with a valid HMAC-SHA256 signature over the raw request body, compared in constant time. Without a secret nothing is accepted.</li>
+        <li>The client secret, the access token and the webhook secret are readable and writable only for the Shopify Manager group.</li>
+        <li>Product image links carry a signature that cannot be guessed, expose only the product image, and need no login.</li>
+        <li>Odoo reads and writes only through the permissions of the Shopify groups. Stores, queue, log, products and customer maps follow the company rules.</li>
+        <li>Safe mode and per-feature switches stop writes to Shopify at the source.</li>
+        <li>No data is sent anywhere except your own Shopify store.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0; background-color: #f4f7fb;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Facts and limits</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Compatibility and requirements</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <table class="table table-bordered" style="background:#fff;">
+        <tbody>
+          <tr><th style="width: 30%;background:#f4f7fb;">Odoo version</th><td>17.0 only. Separate builds exist for 16, 17, 18, 19 and 20.</td></tr>
+          <tr><th style="background:#f4f7fb;">Required Odoo apps</th><td>Sales, Inventory (sale_stock), Invoicing and Discuss. Delivery carriers are used for tracking when installed.</td></tr>
+          <tr><th style="background:#f4f7fb;">Python libraries</th><td>None beyond Odoo itself.</td></tr>
+          <tr><th style="background:#f4f7fb;">Shopify</th><td>Admin GraphQL API, version 2026-10 by default, set per store. Dev Dashboard app or existing Admin API token.</td></tr>
+          <tr><th style="background:#f4f7fb;">Hosting</th><td>Self-hosted and Odoo.sh. Odoo Online (SaaS) does not allow custom modules and is not supported.</td></tr>
+          <tr><th style="background:#f4f7fb;">Network</th><td>Public HTTPS for webhooks and for product images. Outgoing HTTPS to your store.</td></tr>
+          <tr><th style="background:#f4f7fb;">Testing</th><td>94 automated tests (unit, queue and HTTP, including webhook signatures) run on Odoo 17.0 against a simulated Shopify, and the interface was checked in a browser against a demo database. Enterprise has not been tested.</td></tr>
+        </tbody>
+      </table>
+      <h5 style="color:#14305a;margin-top:22px;">Known limitations</h5>
+      <ul style="line-height:1.7;color:#2c3a57;">
+        <li>Not included: Shopify Markets price lists, bundles and kits as Shopify products, multi-language product content, customer segments, B2B company catalogs, editing orders in Shopify, creating refunds in Shopify, automatic bank reconciliation of payouts, net profit reports.</li>
+        <li>A public app install (interactive OAuth) is not implemented. The app must be in your own Shopify organization, or you need an existing Admin API token.</li>
+        <li>Export covers up to 100 variants per product and the main product image only. Gallery and variant images are not exported.</li>
+        <li>Stock is exported on a schedule (every 30 minutes by default) and on demand, not at the moment of every stock move.</li>
+        <li>Order lines of a Shopify order must be matched by SKU or barcode. Lines without a match wait until you fix them, unless product creation is enabled.</li>
+        <li>The store pricelist must be in the currency of the Shopify store, or a pricelist in that currency must exist.</li>
+        <li>Privacy requests (data request, redact) are recorded in the log. Deleting personal data in Odoo remains a manual decision.</li>
+        <li>The module has been tested on a simulated Shopify, see the section above.</li>
+        <li>Labels and texts are in English and can be translated with the standard Odoo tools.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div class="oe_row oe_spaced" style="padding: 44px 0;">
+    <div class="container">
+      <div style="color:#1fb5a8;font-weight:800;letter-spacing:1.6px;font-size:13px;text-transform:uppercase;margin-bottom:6px;">Questions</div><h2 style="margin: 0 0 8px 0; color:#14305a; font-weight:800; font-size:32px;">Frequently asked questions</h2><div style="width:64px;height:4px;background:#f4a261;border-radius:2px;margin:0 0 20px 0;"></div>
+      <div class="row">
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Which Shopify app type do I need?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A Dev Dashboard app in the same Shopify organization as the store, with the scopes listed above. Odoo uses the client credentials grant. If you already own a custom app with an Admin API token, you can paste that token instead.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Do I need a public Odoo server?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">For webhooks and product images, yes. Without a public address the connector still imports orders and exports stock and tracking on schedule.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Can I try it without risking my live store?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Yes. Use a Shopify development store, or turn on safe mode on the live store: all imports work and nothing is written to Shopify.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">What happens if the same webhook arrives twice?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">The delivery id is stored and the second one is ignored. Even without it, an order can only be imported once per store.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">What if a SKU does not exist in Odoo?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">The order waits in the queue, an activity names the line, and the order imports when you fix it. Or enable product creation on the store.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">How does stock get to Shopify?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">A scheduled action sends the quantities that changed since the last run, per location, using free, on hand or forecast quantity with your percentage, buffer and cap.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Can I run several stores?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Yes. Each store has its own company, warehouse, pricelist, workflows, schedules and credentials.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Does it create invoices and register payments?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">If the workflow for the payment status says so. A paid order can be confirmed, delivered, invoiced, posted and paid in the journal of its payment gateway.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">How are taxes handled?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Map Shopify tax titles and rates to Odoo taxes, or let the connector find a sales tax with the same rate. Prices with and without tax are converted so the Odoo total matches Shopify.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">What about privacy requests from Shopify?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">The three privacy topics are accepted and written to the log with the shop domain. Deciding what to delete in Odoo stays with you.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">Can I change the Shopify API version?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Yes, per store. The default is 2026-10. Check the verification checklist after you change it.</p></div></div>
+        <div class="col-md-6" style="margin-bottom:16px;"><div style="background:#fff;border:1px solid #e3e8f0;border-radius:10px;padding:16px 18px;height:100%;"><h5 style="color:#14305a;font-weight:700;margin:0 0 8px 0;">How can I contact AXSync for support?</h5><p style="margin:0;color:#4b5a73;line-height:1.55;">Email <a href="mailto:hunain@axsync.com">hunain@axsync.com</a> or use the Contact the Author option on this Odoo Apps Store page.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="oe_container">
+  <div style="background: linear-gradient(125deg, #0b1530 0%, #14305a 55%, #17808a 100%); padding: 46px 0; color:#fff;">
+    <div class="container">
+      <div class="row" style="align-items:center;">
+        <div class="col-md-8">
+          <h2 style="margin: 0 0 8px 0; font-weight:800; color:#fff;">One source of truth for your Shopify business.</h2>
+          <p style="font-size: 17px; color:#d6e4f5; margin:0;">Install Shopify Odoo Connector, connect a development store, and run the checklist. Questions? <a href="mailto:hunain@axsync.com" style="color:#f4a261;font-weight:700;">hunain@axsync.com</a> &nbsp;|&nbsp; <a href="https://www.axsync.com" style="color:#f4a261;font-weight:700;">www.axsync.com</a></p>
+        </div>
+        <div class="col-md-4 text-center" style="margin-top:10px;"><img src="axsync_icon.png" alt="AXSync" style="width:110px;height:110px;border-radius:24px;box-shadow:0 14px 34px rgba(0,0,0,.4);"/></div>
+      </div>
+      <p style="margin:22px 0 0 0;font-size:12px;color:#9fb6d3;">Published by AXSync. This module is an independent product and is not made, endorsed or sponsored by Shopify Inc. or Odoo S.A. Shopify is a trademark of Shopify Inc. Odoo is a trademark of Odoo S.A.</p>
+    </div>
+  </div>
+</section>
