@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_axsync_shopify_store_kanban" model="ir.ui.view">
+        <field name="name">axsync.shopify.store.kanban</field>
+        <field name="model">axsync.shopify.store</field>
+        <field name="arch" type="xml">
+            <kanban class="o_axsync_shopify_kanban" create="1">
+                <field name="name"/>
+                <field name="state"/>
+                <field name="shop_domain"/>
+                <field name="order_count"/>
+                <field name="product_count"/>
+                <field name="customer_count"/>
+                <field name="queue_pending"/>
+                <field name="queue_failed"/>
+                <field name="error_count"/>
+                <field name="sales_total"/>
+                <field name="currency_id"/>
+                <field name="read_only"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <div class="fw-bold fs-4"><field name="name"/></div>
+                                    <div class="text-muted small"><field name="shop_domain"/></div>
+                                </div>
+                                <div>
+                                    <span t-if="record.state.raw_value == 'connected'" class="badge text-bg-success">Connected</span>
+                                    <span t-elif="record.state.raw_value == 'error'" class="badge text-bg-danger">Error</span>
+                                    <span t-else="" class="badge text-bg-secondary">Not connected</span>
+                                    <span t-if="record.read_only.raw_value" class="badge text-bg-warning ms-1">Safe mode</span>
+                                </div>
+                            </div>
+                            <div class="row text-center g-2 mt-1">
+                                <div class="col-4"><div class="fs-3 fw-bold"><field name="order_count"/></div><div class="text-muted small">Orders</div></div>
+                                <div class="col-4"><div class="fs-3 fw-bold"><field name="product_count"/></div><div class="text-muted small">Products</div></div>
+                                <div class="col-4"><div class="fs-3 fw-bold"><field name="customer_count"/></div><div class="text-muted small">Customers</div></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3 pt-2 border-top small">
+                                <span><span class="fw-bold"><field name="queue_pending"/></span> waiting</span>
+                                <span t-att-class="record.queue_failed.raw_value ? 'text-danger fw-bold' : ''"><field name="queue_failed"/> failed</span>
+                                <span><field name="sales_total" widget="monetary"/></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_axsync_shopify_store_tree" model="ir.ui.view">
+        <field name="name">axsync.shopify.store.tree</field>
+        <field name="model">axsync.shopify.store</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="shop_domain"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="state" widget="badge" decoration-success="state == 'connected'" decoration-danger="state == 'error'"/>
+                <field name="order_count"/>
+                <field name="queue_pending"/>
+                <field name="queue_failed"/>
+                <field name="last_order_sync"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_axsync_shopify_store_form" model="ir.ui.view">
+        <field name="name">axsync.shopify.store.form</field>
+        <field name="model">axsync.shopify.store</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_connect" string="Connect and test" type="object" class="btn-primary"/>
+                    <button name="action_import_locations" string="Refresh locations" type="object" invisible="state != 'connected'"/>
+                    <button name="action_register_webhooks" string="Register webhooks" type="object" invisible="state != 'connected'"/>
+                    <button name="action_process_queue" string="Process queue now" type="object" invisible="state != 'connected'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,connected"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_orders" type="object" class="oe_stat_button" icon="fa-shopping-cart" invisible="state == 'draft'">
+                            <field name="order_count" widget="statinfo" string="Orders"/>
+                        </button>
+                        <button name="action_view_products" type="object" class="oe_stat_button" icon="fa-cubes" invisible="state == 'draft'">
+                            <field name="product_count" widget="statinfo" string="Products"/>
+                        </button>
+                        <button name="action_view_customers" type="object" class="oe_stat_button" icon="fa-users" invisible="state == 'draft'">
+                            <field name="customer_count" widget="statinfo" string="Customers"/>
+                        </button>
+                        <button name="action_view_queue" type="object" class="oe_stat_button" icon="fa-tasks" invisible="state == 'draft'">
+                            <field name="queue_pending" widget="statinfo" string="Waiting jobs"/>
+                        </button>
+                        <button name="action_view_logs" type="object" class="oe_stat_button" icon="fa-exclamation-triangle" invisible="state == 'draft'">
+                            <field name="error_count" widget="statinfo" string="Errors"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Safe mode" bg_color="text-bg-warning" invisible="not read_only"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="My Shopify store"/></h1>
+                    </div>
+                    <div class="alert alert-danger" role="alert" invisible="state != 'error'">
+                        <field name="last_error"/>
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="not missing_scopes">
+                        The app is missing these access scopes: <field name="missing_scopes" class="d-inline"/>
+                    </div>
+                    <notebook>
+                        <page string="Connection" name="connection">
+                            <group>
+                                <group string="Store">
+                                    <field name="shop_domain" placeholder="my-shop.myshopify.com"/>
+                                    <field name="company_id"/>
+                                    <field name="api_version"/>
+                                    <field name="read_only"/>
+                                    <field name="shop_name"/>
+                                    <field name="shop_currency_id"/>
+                                    <field name="taxes_included"/>
+                                </group>
+                                <group string="Authentication">
+                                    <field name="auth_mode"/>
+                                    <field name="client_id" invisible="auth_mode != 'client'"/>
+                                    <field name="client_secret" password="True" invisible="auth_mode != 'client'"/>
+                                    <field name="access_token" password="True" invisible="auth_mode != 'token'"/>
+                                    <field name="webhook_secret" password="True" invisible="auth_mode != 'token'"/>
+                                    <field name="token_status"/>
+                                    <field name="granted_scopes"/>
+                                </group>
+                            </group>
+                            <group string="Webhooks">
+                                <field name="use_webhooks"/>
+                                <field name="webhook_url" widget="CopyClipboardChar"/>
+                            </group>
+                        </page>
+                        <page string="Orders" name="orders">
+                            <group>
+                                <group string="Order defaults">
+                                    <field name="warehouse_id"/>
+                                    <field name="pricelist_id"/>
+                                    <field name="payment_term_id"/>
+                                    <field name="team_id"/>
+                                    <field name="user_id"/>
+                                    <field name="order_origin_prefix"/>
+                                    <field name="shipping_product_id"/>
+                                    <field name="discount_product_id"/>
+                                    <field name="default_tax_id"/>
+                                </group>
+                                <group string="Import rules">
+                                    <field name="import_orders_after"/>
+                                    <field name="auto_create_products"/>
+                                    <field name="use_presentment_currency"/>
+                                    <field name="order_tags_to_note"/>
+                                    <field name="sync_cancellations"/>
+                                    <field name="export_cancellations"/>
+                                    <field name="activity_user_id"/>
+                                </group>
+                            </group>
+                            <group string="Import orders with these payment statuses">
+                                <group>
+                                    <field name="imp_pending"/>
+                                    <field name="imp_authorized"/>
+                                    <field name="imp_paid"/>
+                                    <field name="imp_partially_paid"/>
+                                </group>
+                                <group>
+                                    <field name="imp_partially_refunded"/>
+                                    <field name="imp_refunded"/>
+                                    <field name="imp_voided"/>
+                                </group>
+                            </group>
+                            <group string="Order workflows">
+                                <field name="workflow_ids" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="financial_status"/>
+                                        <field name="auto_confirm"/>
+                                        <field name="auto_validate_delivery"/>
+                                        <field name="create_invoice"/>
+                                        <field name="validate_invoice"/>
+                                        <field name="register_payment"/>
+                                        <field name="payment_journal_id"/>
+                                    </list>
+                                </field>
+                            </group>
+                            <group string="Payment gateways">
+                                <field name="gateway_ids" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="journal_id"/>
+                                        <field name="workflow_id" domain="[('store_id', '=', parent.id)]"/>
+                                    </list>
+                                </field>
+                            </group>
+                            <group string="Taxes">
+                                <field name="tax_map_ids" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="title"/>
+                                        <field name="rate"/>
+                                        <field name="tax_id"/>
+                                    </list>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Products" name="products">
+                            <group>
+                                <group string="Export">
+                                    <field name="export_as_draft"/>
+                                    <field name="export_description"/>
+                                    <field name="export_images"/>
+                                    <field name="image_base_url" invisible="not export_images"/>
+                                    <field name="vendor_name"/>
+                                    <field name="compare_at_mode"/>
+                                </group>
+                                <group string="Prices">
+                                    <field name="price_markup_percent"/>
+                                    <field name="price_rounding"/>
+                                </group>
+                                <group string="Import">
+                                    <field name="create_missing_categories"/>
+                                    <field name="auto_import_products"/>
+                                </group>
+                            </group>
+                            <group string="Metafield mapping">
+                                <field name="metafield_map_ids" nolabel="1">
+                                    <list editable="bottom">
+                                        <field name="owner"/>
+                                        <field name="namespace"/>
+                                        <field name="key"/>
+                                        <field name="odoo_field"/>
+                                        <field name="direction"/>
+                                    </list>
+                                </field>
+                            </group>
+                            <div class="d-flex gap-2">
+                                <button name="action_import_products" string="Import products now" type="object" invisible="state != 'connected'"/>
+                                <button name="action_export_products" string="Export products now" type="object" invisible="state != 'connected'"/>
+                            </div>
+                        </page>
+                        <page string="Inventory" name="inventory">
+                            <group>
+                                <group string="Quantity to send">
+                                    <field name="stock_source"/>
+                                    <field name="stock_percent"/>
+                                    <field name="stock_buffer"/>
+                                    <field name="stock_cap"/>
+                                    <field name="stock_changed_only"/>
+                                </group>
+                                <group string="Status">
+                                    <field name="auto_export_stock"/>
+                                    <field name="last_stock_export"/>
+                                </group>
+                            </group>
+                            <group string="Locations">
+                                <field name="location_ids" nolabel="1">
+                                    <list editable="bottom" create="0">
+                                        <field name="name"/>
+                                        <field name="is_active"/>
+                                        <field name="is_fulfillment_service"/>
+                                        <field name="warehouse_id"/>
+                                        <field name="export_stock"/>
+                                    </list>
+                                </field>
+                            </group>
+                            <div class="d-flex gap-2">
+                                <button name="action_export_stock" string="Export all quantities now" type="object" invisible="state != 'connected'"/>
+                                <button name="action_import_stock" string="Import quantities from Shopify" type="object" invisible="state != 'connected'"/>
+                            </div>
+                        </page>
+                        <page string="Customers and more" name="customers">
+                            <group>
+                                <group string="Customers">
+                                    <field name="import_tags_as_categories"/>
+                                    <field name="last_customer_sync"/>
+                                </group>
+                                <group string="Shipping">
+                                    <field name="auto_export_tracking"/>
+                                    <field name="last_tracking_export"/>
+                                </group>
+                                <group string="Other data">
+                                    <field name="auto_import_checkouts"/>
+                                    <field name="auto_import_payouts"/>
+                                    <field name="last_payout_sync"/>
+                                </group>
+                            </group>
+                            <div class="d-flex gap-2">
+                                <button name="action_import_customers" string="Import customers" type="object" invisible="state != 'connected'"/>
+                                <button name="action_export_customers" string="Export customers" type="object" invisible="state != 'connected'"/>
+                                <button name="action_import_checkouts" string="Import abandoned checkouts" type="object" invisible="state != 'connected'"/>
+                                <button name="action_import_payouts" string="Import payouts" type="object" invisible="state != 'connected'"/>
+                                <button name="action_export_tracking" string="Send tracking now" type="object" invisible="state != 'connected'"/>
+                            </div>
+                        </page>
+                        <page string="Automation" name="automation">
+                            <group>
+                                <group string="Scheduled work">
+                                    <field name="auto_import_orders"/>
+                                    <field name="last_order_sync"/>
+                                    <field name="last_webhook_at"/>
+                                </group>
+                            </group>
+                            <div class="d-flex gap-2">
+                                <button name="action_import_orders" string="Import orders now" type="object" invisible="state != 'connected'"/>
+                            </div>
+                        </page>
+                        <page string="Webhooks" name="webhooks">
+                            <div class="d-flex gap-2 mb-2">
+                                <button name="action_sync_webhooks" string="Compare with Shopify" type="object" invisible="state != 'connected'"/>
+                                <button name="action_remove_webhooks" string="Remove from Shopify" type="object" invisible="state != 'connected'"/>
+                            </div>
+                            <field name="webhook_ids" nolabel="1">
+                                <list editable="bottom" create="0">
+                                    <field name="topic"/>
+                                    <field name="enabled"/>
+                                    <field name="registered_remote"/>
+                                    <field name="received_count"/>
+                                    <field name="last_received"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_axsync_shopify_store_search" model="ir.ui.view">
+        <field name="name">axsync.shopify.store.search</field>
+        <field name="model">axsync.shopify.store</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="shop_domain"/>
+                <filter name="connected" string="Connected" domain="[('state', '=', 'connected')]"/>
+                <filter name="error" string="Error" domain="[('state', '=', 'error')]"/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_axsync_shopify_store" model="ir.actions.act_window">
+        <field name="name">Shopify stores</field>
+        <field name="res_model">axsync.shopify.store</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Connect your first Shopify store</p>
+            <p>Create the app in the Shopify Dev Dashboard, paste the client ID and secret here, and press Connect.</p>
+        </field>
+    </record>
+</odoo>
