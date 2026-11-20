@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_axsync_shopify" model="ir.module.category">
+        <field name="name">Shopify Connector</field>
+        <field name="sequence">92</field>
+    </record>
+
+    <record id="res_groups_privilege_axsync_shopify" model="res.groups.privilege">
+        <field name="name">Shopify Connector</field>
+        <field name="sequence">92</field>
+        <field name="category_id" ref="module_category_axsync_shopify"/>
+    </record>
+
+    <record id="group_axsync_shopify_user" model="res.groups">
+        <field name="name">Shopify User</field>
+        <field name="privilege_id" ref="res_groups_privilege_axsync_shopify"/>
+        <field name="comment">Can see Shopify stores, orders, products, queue and logs, and send tracking numbers.</field>
+    </record>
+
+    <record id="group_axsync_shopify_manager" model="res.groups">
+        <field name="name">Shopify Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_axsync_shopify"/>
+        <field name="implied_ids" eval="[(4, ref('group_axsync_shopify_user'))]"/>
+        <field name="comment">Connects stores and changes their settings, runs imports and exports, and manages webhooks.</field>
+    </record>
+
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_axsync_shopify_manager'))]"/>
+    </record>
+</odoo>

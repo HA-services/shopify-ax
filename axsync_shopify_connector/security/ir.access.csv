@@ -1,0 +1,37 @@
+id,name,model_id,group_id/id,operation,domain
+access_axsync_shopify_store_manager,axsync.shopify.store manager,axsync.shopify.store,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_store_user,axsync.shopify.store user,axsync.shopify.store,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_location_manager,axsync.shopify.location manager,axsync.shopify.location,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_location_user,axsync.shopify.location user,axsync.shopify.location,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_gateway_manager,axsync.shopify.gateway manager,axsync.shopify.gateway,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_gateway_user,axsync.shopify.gateway user,axsync.shopify.gateway,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_workflow_manager,axsync.shopify.workflow manager,axsync.shopify.workflow,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_workflow_user,axsync.shopify.workflow user,axsync.shopify.workflow,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_tax_map_manager,axsync.shopify.tax_map manager,axsync.shopify.tax.map,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_tax_map_user,axsync.shopify.tax_map user,axsync.shopify.tax.map,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_metafield_map_manager,axsync.shopify.metafield_map manager,axsync.shopify.metafield.map,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_metafield_map_user,axsync.shopify.metafield_map user,axsync.shopify.metafield.map,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_webhook_manager,axsync.shopify.webhook manager,axsync.shopify.webhook,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_webhook_user,axsync.shopify.webhook user,axsync.shopify.webhook,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_log_manager,axsync.shopify.log manager,axsync.shopify.log,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_log_user,axsync.shopify.log user,axsync.shopify.log,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_queue_manager,axsync.shopify.queue manager,axsync.shopify.queue,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_queue_user,axsync.shopify.queue user,axsync.shopify.queue,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_product_manager,axsync.shopify.product manager,axsync.shopify.product,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_product_user,axsync.shopify.product user,axsync.shopify.product,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_variant_manager,axsync.shopify.variant manager,axsync.shopify.variant,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_variant_user,axsync.shopify.variant user,axsync.shopify.variant,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_stock_state_manager,axsync.shopify.stock_state manager,axsync.shopify.stock.state,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_stock_state_user,axsync.shopify.stock_state user,axsync.shopify.stock.state,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_customer_manager,axsync.shopify.customer manager,axsync.shopify.customer,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_customer_user,axsync.shopify.customer user,axsync.shopify.customer,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_checkout_manager,axsync.shopify.checkout manager,axsync.shopify.checkout,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_checkout_user,axsync.shopify.checkout user,axsync.shopify.checkout,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_payout_manager,axsync.shopify.payout manager,axsync.shopify.payout,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+access_axsync_shopify_payout_user,axsync.shopify.payout user,axsync.shopify.payout,axsync_shopify_connector.group_axsync_shopify_user,r,
+access_axsync_shopify_import_order_manager,axsync.shopify.import.order manager,axsync.shopify.import.order,axsync_shopify_connector.group_axsync_shopify_manager,crud,
+rule_axsync_shopify_store_company,axsync.shopify.store: company,axsync.shopify.store,,crud,"[('company_id', 'in', company_ids)]"
+rule_axsync_shopify_queue_company,axsync.shopify.queue: company,axsync.shopify.queue,,crud,"[('store_id.company_id', 'in', company_ids)]"
+rule_axsync_shopify_log_company,axsync.shopify.log: company,axsync.shopify.log,,crud,"['|', ('store_id', '=', False), ('store_id.company_id', 'in', company_ids)]"
+rule_axsync_shopify_product_company,axsync.shopify.product: company,axsync.shopify.product,,crud,"[('store_id.company_id', 'in', company_ids)]"
+rule_axsync_shopify_customer_company,axsync.shopify.customer: company,axsync.shopify.customer,,crud,"[('store_id.company_id', 'in', company_ids)]"
